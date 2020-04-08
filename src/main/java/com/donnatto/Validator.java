@@ -10,9 +10,6 @@ import static com.donnatto.utils.Helpers.getTypeNumber;
 
 public class Validator {
 
-    public Validator() {
-    }
-
     public String calculateCCI(Bank bank, AccountType type, Account account) {
 
         String bankNumber;
@@ -28,6 +25,7 @@ public class Validator {
             officeNumber = account.getAccount().substring(0, 3);
             accountNumber = account.getAccount().substring(3);
 
+            // Only valid with BCP
             if (accountNumber.length() < 12) {
                 accountNumber = typeNumber + StringUtils.leftPad(accountNumber, 11, "0");
             }
@@ -60,12 +58,14 @@ public class Validator {
             for (String arg : args) {
                 input.append(arg);
             }
+
             char[] chars = input.toString().toCharArray();
-            int[] numbers = new int[chars.length];
+            int length = chars.length;
+            int[] numbers = new int[length];
             int sum = 0;
             int result;
 
-            for (int i = 0; i < chars.length; i++) {
+            for (int i = 0; i < length; i++) {
                 numbers[i] = Character.getNumericValue(chars[i]);
                 numbers[i] = i % 2 == 0 ? numbers[i] : numbers[i] * 2;
                 numbers[i] = numbers[i] > 9 ? 1 + numbers[i] % 10 : numbers[i];
