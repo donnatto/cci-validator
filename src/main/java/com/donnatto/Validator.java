@@ -1,6 +1,5 @@
 package com.donnatto;
 
-import com.donnatto.model.Account;
 import com.donnatto.model.AccountType;
 import com.donnatto.model.Bank;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +9,7 @@ import static com.donnatto.utils.Helpers.getTypeNumber;
 
 public class Validator {
 
-    public String calculateCCI(Bank bank, AccountType type, Account account) {
+    public String calculateCCI(Bank bank, AccountType type, String account) {
 
         String bankNumber;
         String typeNumber;
@@ -22,8 +21,8 @@ public class Validator {
         try {
             bankNumber = getBankNumber(bank);
             typeNumber = getTypeNumber(type);
-            officeNumber = account.getAccount().substring(0, 3);
-            accountNumber = account.getAccount().substring(3);
+            officeNumber = account.substring(0, 3);
+            accountNumber = account.substring(3);
 
             // Only valid with BCP
             if (accountNumber.length() < 12) {
