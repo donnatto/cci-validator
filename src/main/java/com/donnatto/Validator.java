@@ -5,6 +5,9 @@ import com.donnatto.model.AccountType;
 import com.donnatto.model.Bank;
 import org.apache.commons.lang3.StringUtils;
 
+import static com.donnatto.utils.Helpers.getBankNumber;
+import static com.donnatto.utils.Helpers.getTypeNumber;
+
 public class Validator {
 
     public String calculate(Bank bank, AccountType type, Account account) throws Exception {
@@ -13,6 +16,7 @@ public class Validator {
         String typeNumber = null;
         String officeNumber = null;
         String accountNumber = null;
+        String checkDigit = null;
         String response = null;
 
         try {
@@ -26,6 +30,7 @@ public class Validator {
             }
 
 
+            response = bankNumber + officeNumber + accountNumber + checkDigit;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -34,27 +39,5 @@ public class Validator {
         return response;
     }
 
-    private String getTypeNumber(AccountType type) throws Exception {
-        switch (type) {
-            case CTA_CORRIENTE:
-                return "0";
-            case AHORROS:
-                return "1";
-            default:
-                throw new Exception("Account type is not valid");
-        }
-    }
 
-    private String getBankNumber(Bank bank) throws Exception {
-        switch (bank) {
-            case BCP:
-                return  "002";
-            case INTERBANK:
-                return  "003";
-            case SCOTIABANK:
-                return  "009";
-            default:
-                throw new Exception("Bank is not valid");
-        }
-    }
 }
