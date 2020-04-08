@@ -20,6 +20,8 @@ public class Helpers {
         switch (bank) {
             case BCP:
                 return  "002";
+            case BCP2:
+                return "800";
             case INTERBANK:
                 return  "003";
             case SCOTIABANK:

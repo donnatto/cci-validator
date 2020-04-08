@@ -10,10 +10,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Account account = new Account("898013162578237");
+        Account account = new Account("19197743512018");
 
         Validator validator = new Validator();
-        String cci = validator.calculateCCI(Bank.INTERBANK, AccountType.AHORROS, account);
+        String cci = validator.calculateCCI(Bank.BCP, AccountType.AHORROS, account);
 
     }
 }

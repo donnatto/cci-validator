@@ -1,5 +1,5 @@
 package com.donnatto.model;
 
 public enum Bank {
-    BCP, INTERBANK, SCOTIABANK;
+    BCP, BCP2, INTERBANK, SCOTIABANK;
 }
