@@ -15,11 +15,11 @@ public class Validator {
 
     public String calculateCCI(Bank bank, AccountType type, Account account) {
 
-        String bankNumber = null;
-        String typeNumber = null;
-        String officeNumber = null;
-        String accountNumber = null;
-        String checkDigit = null;
+        String bankNumber;
+        String typeNumber;
+        String officeNumber;
+        String accountNumber;
+        String checkDigit;
         String response = null;
 
         try {
@@ -63,7 +63,7 @@ public class Validator {
             char[] chars = input.toString().toCharArray();
             int[] numbers = new int[chars.length];
             int sum = 0;
-            int result = 0;
+            int result;
 
             for (int i = 0; i < chars.length; i++) {
                 numbers[i] = Character.getNumericValue(chars[i]);
