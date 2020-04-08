@@ -10,7 +10,7 @@ import static com.donnatto.utils.Helpers.getTypeNumber;
 
 public class Validator {
 
-    public String calculate(Bank bank, AccountType type, Account account) throws Exception {
+    public String calculateCCI(Bank bank, AccountType type, Account account) {
 
         String bankNumber = null;
         String typeNumber = null;
@@ -28,6 +28,8 @@ public class Validator {
             if (accountNumber.length() < 12) {
                 accountNumber = typeNumber + StringUtils.leftPad(accountNumber, 11, "0");
             }
+
+            // Implement digit check algorithm
 
 
             response = bankNumber + officeNumber + accountNumber + checkDigit;
