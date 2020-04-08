@@ -10,6 +10,9 @@ import static com.donnatto.utils.Helpers.getTypeNumber;
 
 public class Validator {
 
+    public Validator() {
+    }
+
     public String calculateCCI(Bank bank, AccountType type, Account account) {
 
         String bankNumber = null;
@@ -22,7 +25,7 @@ public class Validator {
         try {
             bankNumber = getBankNumber(bank);
             typeNumber = getTypeNumber(type);
-            officeNumber = account.getAccount().substring(0,3);
+            officeNumber = account.getAccount().substring(0, 3);
             accountNumber = account.getAccount().substring(3);
 
             if (accountNumber.length() < 12) {
@@ -30,9 +33,16 @@ public class Validator {
             }
 
             // Implement digit check algorithm
+            String firstDigit = calcDigits(bankNumber, officeNumber);
+            String secondDigit = calcDigits(accountNumber);
 
+            checkDigit = firstDigit + secondDigit;
 
             response = bankNumber + officeNumber + accountNumber + checkDigit;
+
+            System.out.println("First digit -> " + firstDigit);
+            System.out.println("Second digit -> " + secondDigit);
+            System.out.println("CCI is -> " + response);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,5 +51,35 @@ public class Validator {
         return response;
     }
 
+    private String calcDigits(String... args) {
+
+        String response = null;
+        StringBuilder input = new StringBuilder();
+
+        try {
+            for (String arg : args) {
+                input.append(arg);
+            }
+            char[] chars = input.toString().toCharArray();
+            int[] numbers = new int[chars.length];
+            int sum = 0;
+            int result = 0;
+
+            for (int i = 0; i < chars.length; i++) {
+                numbers[i] = Character.getNumericValue(chars[i]);
+                numbers[i] = i % 2 == 0 ? numbers[i] : numbers[i] * 2;
+                numbers[i] = numbers[i] > 9 ? 1 + numbers[i] % 10 : numbers[i];
+                sum += numbers[i];
+            }
+            result = sum % 10 == 0 ? 0 : 10 - sum % 10;
+
+            response = String.valueOf(result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
 
 }
